@@ -8,8 +8,9 @@ public class StudentCourses {
 	//Constructor
 	public StudentCourses() {
 		Scanner console = new Scanner(System.in);
-		//System.out.print()
+		
 	}
+	//Enroll Student in class and update tuition 
 	public void enroll() {
 		do {
 			Scanner console = new Scanner(System.in);
