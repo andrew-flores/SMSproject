@@ -70,5 +70,7 @@ public class Sms {
 					"                     \"V::... . .I::IHHMMV\"'\r\n" + 
 					"                       '\"VHVHHHAHHHHMMV:\"'");
 		}
+		StudentCourses s1 = new StudentCourses();
+		s1.enroll();
 	}
 }
