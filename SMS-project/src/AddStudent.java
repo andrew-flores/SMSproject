@@ -12,7 +12,8 @@ public class AddStudent {
 	private static String specialChars = "!@#$%^&*().";
 	
 	/**
-	 * This method generates login username based on user's first and last name and RNG
+	 * This method generates login username based on user's first name followed by first letter of 
+	   last name followed by 2 random numbers
 	 * @return automatically generated username
 	 */
 	public static String getUserInfo() {
@@ -33,8 +34,10 @@ public class AddStudent {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * This method verifies that the password entered by the user meets the minimum 
+	   requirements of at least 8 characters long including at least 1 uppercase, 
+	   1 lowercase, 1 number and 1 special character
+	 * @return user generated password
 	 */
 	private static String verifyPassword() {
 		Scanner kb = new Scanner(System.in);
@@ -83,6 +86,11 @@ public class AddStudent {
 		return password;
 	}
 
+	/**
+	 * This method gets the GPA of a transfer student and displays no GPA if the user 
+	   is a new student
+	 * @return GPA of transfer student 
+	 */
 	public static double getGPA() {
 		Scanner kb = new Scanner(System.in);
 		System.out.print(
@@ -103,7 +111,8 @@ public class AddStudent {
 		}
 		return gpa;
 	}
-
+	
+	/* This method tests all methods */
 	public static void addStudentRun() {
 		getUserInfo();
 		verifyPassword();
