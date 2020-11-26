@@ -1,15 +1,12 @@
 import java.util.*;
 /**
  * 
- * @author trank
+ * @author Team
  *
  */
 public class Sms {
-
-	/*
-	 * Nam made this, delete later
-	 */
-	private static final int MAX_ATTEMPT = 5;
+	
+	private static final int MAX_ATTEMPT = 5;	// maximum attempt allowed for login
 
 	public static void main(String args[]) {
 		Scanner s = new Scanner(System.in);
@@ -23,9 +20,10 @@ public class Sms {
 			System.out.println("Welcome, " + student.getFirst());
 			menu(s);
 			System.out.println("Goodbye, " + student.getFirst());
+			System.out.println("\n==========================================================");
 		} catch (Exception e) {
 			// I'm bored do whatever here I guess idc sry if it lags your system
-			System.out.println("YOU FELL FOR IT, FOOL!\nTHUNDER CROSS SPLIT ATTACK!");
+			System.out.println("=====*** Authentication Timeout ***=====");
 		}
 	}
 	
@@ -34,7 +32,7 @@ public class Sms {
 	 * @param s Scanner for user input
 	 */
 	public static void menu(Scanner s) {
-		boolean exit = false;
+		boolean exit = false;	// exit flag to log off 
 		while (!exit) {
 			System.out.println("---------------------------------------------");
 			System.out.println("Please select a menu option:");
@@ -55,15 +53,15 @@ public class Sms {
 				break;
 			case "4":
 				break;
-			case "q":
-				System.out.println("Are you sure you want to log out? (YES/NO) ");	
+			case "q": case "Q":
+				System.out.println("Are you sure you want to log out? (YES/NO) ");	// confirm log off	
 				String confirm = s.next();
 				if (confirm.equalsIgnoreCase("YES")) {
 					exit = true;	// raise flag
 					System.out.println("Logging you out now...");
 				}
 				break;
-			default: System.out.println("ERROR! Please enter a correct option.");	
+			default: System.out.println("ERROR! Please enter a correct option.");	// show error for every other input
 			}
 		}
 	}
