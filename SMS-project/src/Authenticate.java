@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
 
 public class Authenticate {
 	/* SUBJECT TO CHANGE
@@ -6,15 +8,14 @@ public class Authenticate {
 	 * aka some kind of external file such as .txt or .csv
 	 */
 	private static final int MAX_ATTEMPT = 5;
-	private static String username = "JohnWood";		
-	private static String password = "H@xx0r_420";
+	private static int index = 0;
 	
 	/**
 	 * This method prompts the user for username input
 	 * @param s Scanner to get input
 	 * @return user-entered username
 	 */
-	public static String getUser(Scanner s) {
+	private static String getUser(Scanner s) {
 		System.out.print("Username: ");
 		String enter_username = s.nextLine();
 		
@@ -26,7 +27,7 @@ public class Authenticate {
 	 * @param s Scanner to get input
 	 * @return user-entered password
 	 */
-	public static String getPassword(Scanner s) {
+	private static String getPassword(Scanner s) {
 		System.out.print("Password: ");
 		String enter_password = s.nextLine();
 		
@@ -39,8 +40,29 @@ public class Authenticate {
 	 * @param pass user-entered password
 	 * @return if the user-entered credential is valid or not 
 	 */
-	public static boolean verify(String user, String pass) {
-		return user.equals(username) && pass.equals(password);
+	private static boolean verify(String user, String pass) {
+		String input = user + "," + pass; // username,password
+		// read from file
+		File myObj = new File("crdntl.csv");
+		Scanner s;
+		try {
+			s = new Scanner(myObj);
+			while (s.hasNext()) {
+				if (s.next().equals(input))	
+					return true;
+				
+				index++;
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Error occurred: data not found");
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+	public static int getIndex() {
+		return index;
 	}
 	
 	/**
@@ -55,6 +77,7 @@ public class Authenticate {
 		
 		while(!verify(user,pass)) {			// if wrong credential , enter again
 			System.out.println("Incorrect username/password. Please try again...\n");
+			index = 0;
 			user = getUser(s);
 			pass = getPassword(s);
 			attempt++;
