@@ -2,13 +2,15 @@ import java.util.Scanner;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 
+/**
+ * This class handles authentication for student login. 
+ * Also handles finding student in the database
+ * @author Nam
+ *
+ */
 public class Authenticate {
-	/* SUBJECT TO CHANGE
-	 * Usernames and passwords should be taken from a database 
-	 * aka some kind of external file such as .txt or .csv
-	 */
-	private static final int MAX_ATTEMPT = 5;
-	private static int index = 0;
+	private static final int MAX_ATTEMPT = 5;	// for stop authenticating
+	private static int index = 0;	// for finding the student in the database
 	
 	/**
 	 * This method prompts the user for username input
@@ -41,7 +43,8 @@ public class Authenticate {
 	 * @return if the user-entered credential is valid or not 
 	 */
 	private static boolean verify(String user, String pass) {
-		String input = user + "," + pass; // username,password
+		String input = user + "," + pass; 	// username,password
+		
 		// read from file
 		File myObj = new File("crdntl.csv");
 		Scanner s;
@@ -51,7 +54,7 @@ public class Authenticate {
 				if (s.next().equals(input))	
 					return true;
 				
-				index++;
+				index++;			// finding the index of the student for the database
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error occurred: data not found");
@@ -61,6 +64,10 @@ public class Authenticate {
 		return false;
 	}
 	
+	/**
+	 * This method returns the index of the student profile in the database
+	 * @return the student's index in the database
+	 */
 	public static int getIndex() {
 		return index;
 	}
