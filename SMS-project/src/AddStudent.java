@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,15 +10,15 @@ public class AddStudent {
 	private static String userName;
 	private static String password;
 	private static String studentType;
-	private static int gpa;
+	private static double gpa;
 	private static String specialChars = "!@#$%^&*().";
-	
+	private static Student student;
 	/**
 	 * This method generates login username based on user's first name followed by first letter of 
 	   last name followed by 2 random numbers
 	 * @return automatically generated username
 	 */
-	public static String getUserInfo() {
+	private static String getUserInfo() {
 		// student enters first name and last name
 		Scanner kb = new Scanner(System.in);
 		System.out.print("Enter First Name: ");
@@ -24,12 +26,22 @@ public class AddStudent {
 		System.out.print("Enter Last Name: ");
 		lastName = kb.nextLine();
 
+		FileWriter myWriter;
+		try {
+			myWriter = new FileWriter("names.txt", true);
+			myWriter.write(firstName + " " + lastName + "\n");
+			myWriter.close();
+		} catch (IOException e) {
+			System.out.println("ERROR!");
+			e.printStackTrace();
+		}
+		
 		// username = first name + first letter of last name + 2 random numbers
 		Random random = new Random();
 		int num = random.nextInt(90) + 10;
 		userName = firstName + lastName.substring(0, 1) + num;
 		System.out.println("UserName: " + userName);
-
+		
 		return userName;
 	}
 	
@@ -91,20 +103,21 @@ public class AddStudent {
 	   is a new student
 	 * @return GPA of transfer student 
 	 */
-	public static double getGPA() {
+	private static double getGPA() {
 		Scanner kb = new Scanner(System.in);
 		System.out.print(
 				"Are you a new student or a transfer student? Enter 'N' for new student and 'T' for transfer student: ");
 		studentType = kb.nextLine();
-
-		if (studentType.equalsIgnoreCase("N")) {
-			System.out.println("GPA is unavailabe. ");
-		} else if (studentType.equalsIgnoreCase("T")) {
+		
+		if (studentType.equalsIgnoreCase("N"))
+			System.out.println("GPA is unavailable.");
+		else if (studentType.equalsIgnoreCase("T")) {
 			// Transfer Student GPA
 			double min = 2.0;
 			double max = 4.0;
 			Random r = new Random();
-			System.out.println("Your GPA is " + (r.nextInt((int) ((max - min) * 10 + 1)) + min * 10) / 10.0);
+			gpa = ((r.nextInt((int) ((max - min) * 10 + 1)) + min * 10) / 10.0);
+			System.out.println("Your GPA is " + gpa);
 		} else {
 			System.out.println("Invalid input! Please enter 'N' or 'T'. ");
 			getGPA();
@@ -117,5 +130,15 @@ public class AddStudent {
 		getUserInfo();
 		verifyPassword();
 		getGPA();
+		
+		FileWriter myWriter;
+		try {
+			myWriter = new FileWriter("crdntl.txt", true);
+			myWriter.write(userName + "," + password + "," + gpa + "\n");
+			myWriter.close();
+		} catch (IOException e) {
+			System.out.println("ERROR!");
+			e.printStackTrace();
+		}
 	}
 }

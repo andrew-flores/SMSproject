@@ -19,7 +19,7 @@ public class Authenticate {
 	 */
 	private static String getUser(Scanner s) {
 		System.out.print("Username: ");
-		String enter_username = s.nextLine();
+		String enter_username = s.next();
 		
 		return enter_username;
 	}
@@ -31,7 +31,7 @@ public class Authenticate {
 	 */
 	private static String getPassword(Scanner s) {
 		System.out.print("Password: ");
-		String enter_password = s.nextLine();
+		String enter_password = s.next();
 		
 		return enter_password;
 	}
@@ -46,12 +46,14 @@ public class Authenticate {
 		String input = user + "," + pass; 	// username,password
 		
 		// read from file
-		File myObj = new File("crdntl.csv");
+		File myObj = new File("crdntl.txt");
 		Scanner s;
 		try {
-			s = new Scanner(myObj);
+			s = new Scanner(myObj).useDelimiter(",|\\s");
 			while (s.hasNext()) {
-				if (s.next().equals(input))	
+				String data = s.next() +","+ s.next();
+				s.nextLine();
+				if (data.equals(input))	
 					return true;
 				
 				index++;			// finding the index of the student for the database
