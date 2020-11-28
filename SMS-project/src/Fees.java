@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Fees {
 	private static double totalBalance; // stores student's outstanding balance for their tuition
@@ -18,8 +20,40 @@ public class Fees {
 		return courses;
 	}
 	
+	// Desgin pattern #1 (iterator)
+	// This function adds courses to the array list, then iterates through the list and displays them
+	public static void coursesAvailable()
+	   {
+		  //create an array list 
+		  ArrayList<String> list = new ArrayList<String>();
+	     
+	      // adding courses to the list
+	      list.add("Art,");
+	      list.add("Computer Science,");
+	      list.add("Dance,");
+	      list.add("Forensic Science,");
+	      list.add("Literature,");
+	      list.add("Math,");
+	      list.add("Physics,");
+	      list.add("Tennis,");
+	      list.add("Yoga");
+	     
+	      // Iterator to traverse the list
+	      Iterator iterator = list.iterator();
+	      System.out.println("List of Courses Available: ");
+	     
+	      //print courses
+	      while (iterator.hasNext())
+	            System.out.print(iterator.next() + " ");
+	 
+	        System.out.println();
+	       
+	   }
+	
+	
 	// Function to enroll Student in class and update tuition
 	public static void enroll() {
+		coursesAvailable(); // calls the iterator that displays courses available
 		Scanner console = new Scanner(System.in);
 		do { // enrolls student in desired classes until they choose to quit
 			System.out.print("Enter a course to enroll in (enter quit to exit): ");
