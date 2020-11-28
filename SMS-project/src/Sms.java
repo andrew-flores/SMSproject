@@ -3,7 +3,6 @@ import java.util.*;
 /**
  * Program Preamble: Lorem Ipsum
  * @author Team
- *
  */
 public class Sms {
 	private static final int MAX_ATTEMPT = 5; // maximum attempt allowed for login
@@ -13,14 +12,11 @@ public class Sms {
 
 		System.out.print("Are you a new student? (YES/NO) >_ ");
 		String newstudent = s.next();
-		if (newstudent.equalsIgnoreCase("yes") | newstudent.equalsIgnoreCase("y")) {		// for new students
-			// call AddStudent method
-			AddStudent.addStudentRun();
-			
+		if (newstudent.equalsIgnoreCase("yes") | newstudent.equalsIgnoreCase("y")) {	// check for new students
+			AddStudent.addStudentRun();		// call AddStudent method if new student
 		} else {		// for existing students
 			try {
-				if (Authenticate.run(s) == MAX_ATTEMPT)
-					throw new Exception();
+				if (Authenticate.run(s) == MAX_ATTEMPT) throw new Exception();
 
 				Student student = new Student(Authenticate.getIndex());
 
@@ -30,7 +26,6 @@ public class Sms {
 				System.out.println("Goodbye, " + student.getFirst());
 				System.out.println("\n==========================================================");
 			} catch (Exception e) {
-				// I'm bored do whatever here I guess idc sry if it lags your system
 				System.out.println("=====*** Authentication Timeout ***=====");
 			}
 		}
@@ -75,7 +70,7 @@ public class Sms {
 				}
 				break;
 			default:
-				System.out.println("ERROR! Please enter a correct option."); // show error for every other input
+				System.out.println("ERROR! Please enter a correct option. "); // show error for every other input
 			}
 		}
 	}

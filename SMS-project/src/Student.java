@@ -4,17 +4,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * 
- * @author trank
- *
+ * This class handles the student object
+ * @author Team Energy
  */
 public class Student {
 	private String first;
 	private String last;	
 	private String username;
 	private String GPA;
-	private File file1 = new File("names.txt");
-	private File file2 = new File("crdntl.txt");
+	private File file1 = new File("names.txt");		// Students' names file
+	private File file2 = new File("crdntl.txt");	// Students' credential/GPA file
+	
 	public Student(int index) {
 		if (index < 0)
 			throw new IllegalArgumentException();
@@ -22,29 +22,28 @@ public class Student {
 		Scanner s;
 		
 		try {
-			s = new Scanner(file1);
+			s = new Scanner(file1);		// read from name file
 			int i = 0;
-			
 			while (s.hasNextLine()) {
-				if (i == index) {
-					this.first = s.next();
+				if (i == index) {	// if index is found, put first and last name into the fields
+					this.first = s.next();	
 					this.last = s.next();
 					break;
 				} else
-					s.nextLine();
+					s.nextLine();	// else, move to the next line of the file
 				
 				i++;
 			}
 		
+			s = new Scanner(file2).useDelimiter(",|\\s");	// read from credential file, parse fields separated by commas
 			i = 0;
-			s = new Scanner(file2).useDelimiter(",|\\s");
 			while (s.hasNextLine()) {
-				if (i == index) {
+				if (i == index) {	// if index is found, put username and GPA into the fields
 					this.username = s.next();
 					s.next();
 					this.GPA = s.next();
 					break;
-				} else
+				} else				// else, move to the next line of the file
 					s.nextLine();
 				
 				i++;
@@ -55,6 +54,9 @@ public class Student {
 		}
 	}
 	
+	/**
+	 * Getters for the Student's fields
+	 */
 	public String getFirst() {
 		return this.first;
 	}

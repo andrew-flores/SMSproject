@@ -12,7 +12,7 @@ public class AddStudent {
 	private static String studentType;
 	private static double gpa;
 	private static String specialChars = "!@#$%^&*().";
-	private static Student student;
+	
 	/**
 	 * This method generates login username based on user's first name followed by first letter of 
 	   last name followed by 2 random numbers
@@ -112,16 +112,17 @@ public class AddStudent {
 		if (studentType.equalsIgnoreCase("N"))
 			System.out.println("GPA is unavailable.");
 		else if (studentType.equalsIgnoreCase("T")) {
+			System.out.println("Fetching transcript data...");
 			// Transfer Student GPA
-			double min = 2.0;
-			double max = 4.0;
+			double min = 2.0, max = 4.0;
 			Random r = new Random();
 			gpa = ((r.nextInt((int) ((max - min) * 10 + 1)) + min * 10) / 10.0);
 			System.out.println("Your GPA is " + gpa);
 		} else {
-			System.out.println("Invalid input! Please enter 'N' or 'T'. ");
+			System.out.println("Invalid input! Please enter 'N' or 'T': ");
 			getGPA();
 		}
+		
 		return gpa;
 	}
 	
