@@ -72,7 +72,12 @@ public class Fees {
 			String course = console.nextLine();
 			if (!course.equals("quit")) {
 				courses = courses + "\n" + course; // update courses variable
-				totalBalance = totalBalance + costOfCourse; // update student's total account balance
+				//totalBalance = totalBalance + costOfCourse; 
+				// update student's total account balance
+				//Strategy design pattern #3
+				Context context = new Context(new OperationAdd());
+				totalBalance = context.executeStrategy(totalBalance, costOfCourse);
+				
 			} else 
 				break;
 
@@ -108,8 +113,11 @@ public class Fees {
 						System.out.println(
 								"Error: Cannot pay an amount greater than the total balance. Please try again.\n");
 					else {
-						totalBalance = totalBalance - amountPaid; // total balance is updated after student chooses
-																	// valid payment amount
+						//totalBalance = totalBalance - amountPaid; 
+						// total balance is updated after student chooses valid payment amount
+						//Strategy design pattern #3					
+						Context  context = new Context(new OperationSubstract());
+						totalBalance = context.executeStrategy(totalBalance, amountPaid);
 						System.out.println("Thank you for submitting your payment!");
 					}
 
