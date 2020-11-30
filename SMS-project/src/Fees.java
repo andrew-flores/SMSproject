@@ -16,6 +16,18 @@ public class Fees {
 		this.totalBalance = totalBalance;
 	}
 	
+	//Singleton design pattern #2
+	private static Fees instance = new Fees();
+
+	private Fees() {
+	}
+
+	public static Fees getInstance() {
+		return instance;
+	}
+
+
+	
 	public static String getCourses() {
 		return courses;
 	}
