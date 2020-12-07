@@ -136,8 +136,8 @@ public class Fees {
 		}
 	}
 	//
-	public static void studentAccountRun() {
+	/*public static void studentAccountRun() {
 		enroll();
 		viewAndPayBalance();
-	}
+	}*/
 }

@@ -1,4 +1,7 @@
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -73,10 +76,36 @@ class SmsTest {
 		assertEquals("2.006", student6.getGPA());
 	}
 	
-	@Test
+	/*@Test
 	public void constructor_StudentIndex() { 
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			Student student = new Student(-4);
 		  });
-	} 
+	}*/
+	@Test
+	void feesTest() {
+		Fees fees = Fees.getInstance();
+		fees.enroll();
+		
+		String courses = fees.getCourses();
+		assertEquals("\nMath\nArt", courses);
+		
+		double balance = fees.getTotalBalance();
+		assertEquals(400, balance);
+		
+		fees.viewAndPayBalance();
+		
+	
+		assertEquals(400, balance);
+		
+		double balanceAfter = fees.getTotalBalance();
+		
+		assertEquals(100, balanceAfter);
+		
+		double amountPaid = balance - balanceAfter;
+		
+		assertEquals(300, amountPaid);
+		
+		
+	}
 }
